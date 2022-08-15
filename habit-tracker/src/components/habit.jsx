@@ -6,27 +6,26 @@ class Habit extends Component {
         count: 0,
     };
 
-    handleIncreament = () => {
-        this.props.onIncrement(this.props.habit);
+    handleIncreament = (  ) => {
         // this.setState( { count: this.state.count + 1 } );
-
+        this.props.onIncrement(this.props.habit);
     };
 
-    handleDecreament = () => {
-        this.props.onDecrement(this.props.habit);
+    handleDecreament = (  ) => {
         // const count = this.state.count - 1;
         // this.setState( { count: count < 0 ? 0 : count } );
+        this.props.onDecrement(this.props.habit);
     };
 
-    handleDelete = () => {
-        this.props.onDeletement(this.props.habit);
+    handleDelete = (  ) => {
         // this.setState( { count: 0 } );
+        this.props.onDeletement(this.props.habit);
     };
 
     render() {
         const { name, count } = this.props.habit;
         return (
-            <>
+            <li>
                 <span className="habit-name">{ name }</span>
                 <span className="habit-counting">{ count }</span>
                 <button className="habit-button habit-increase"
@@ -41,7 +40,7 @@ class Habit extends Component {
                         onClick={ this.handleDelete }>
                     <i className="fa-solid fa-trash"></i>
                 </button>
-            </>
+            </li>
         );
     }
 }
