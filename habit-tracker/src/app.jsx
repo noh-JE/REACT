@@ -33,6 +33,17 @@ class App extends Component {
         const habits = this.state.habits.filter( item => item.id !== habit.id );
         this.setState( { habits } );
     };
+    handleAdd = ( name ) => {
+        const habits = [...this.state.habits, { id: Date.now(), name, count: 0 }];
+        this.setState( { habits } );
+    };
+    handleRest = () => {
+        const habits = this.state.habits.map(habit => {
+            habit.count = 0;
+            return habit;
+        })
+        this.setState({habits})
+    };
 
     render() {
         return (
@@ -43,6 +54,8 @@ class App extends Component {
                     onIncrement={ this.handleIncreament }
                     onDecrement={ this.handleDecreament }
                     onDeletement={ this.handleDelete }
+                    onAdd={ this.handleAdd }
+                    onReset={ this.handleRest }
                 />
             </React.Fragment>
         );
