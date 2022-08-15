@@ -1,13 +1,52 @@
-import React from 'react';
-import Habits from './components/habits'
+import React, { Component } from 'react';
+import Header from './components/header';
+import Habits from './components/habits';
 import './app.css';
 
-function App() {
-    return (
-        <React.Fragment>
-            <Habits />
-        </React.Fragment>
-    );
+
+class App extends Component {
+    // data를 가지고 있는 곳이 내가 data를 어떻게 처리할 수 있는지 잘 알 수 있는 공간이다.
+    state = {
+        habits: [
+            { id: 1, name: '독서', count: 0 },
+            { id: 2, name: '드라마', count: 0 },
+            { id: 3, name: '영화', count: 0 },
+        ]
+    };
+
+    handleIncreament = ( habit ) => {
+        const habits = [...this.state.habits];
+        const index = habits.indexOf( habit );
+        habits[index].count++;
+        this.setState( { habits } );
+    };
+
+    handleDecreament = ( habit ) => {
+        const habits = [...this.state.habits];
+        const index = habits.indexOf( habit );
+        const count = habits[index].count - 1;
+        habits[index].count = count < 0 ? 0 : count;
+        this.setState( { habits } );
+    };
+
+    handleDelete = ( habit ) => {
+        const habits = this.state.habits.filter( item => item.id !== habit.id );
+        this.setState( { habits } );
+    };
+
+    render() {
+        return (
+            <React.Fragment>
+                <Header totalCount={ this.state.habits.filter( item => item.count > 0 ).length }/>
+                <Habits
+                    habits={ this.state.habits }
+                    onIncrement={ this.handleIncreament }
+                    onDecrement={ this.handleDecreament }
+                    onDeletement={ this.handleDelete }
+                />
+            </React.Fragment>
+        );
+    }
 }
 
 export default App;
