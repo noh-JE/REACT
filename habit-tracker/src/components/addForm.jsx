@@ -1,27 +1,24 @@
-import React, { PureComponent } from 'react';
+import React, { memo } from 'react';
 
-class AddForm extends PureComponent {
-    formRef = React.createRef();
-    inputRef = React.createRef();
+const AddForm = memo((props) => {
+    const formRef = React.createRef();
+    const inputRef = React.createRef();
 
-    onSubmit = ( event ) => {
+    const onSubmit = ( event ) => {
         event.preventDefault();
-        const name = this.inputRef.current.value;
-        name && this.props.onAdd( name );
-        // this.inputRef.current.value = '';
-        this.formRef.current.reset();
+        const name = inputRef.current.value;
+        name && props.onAdd( name );
+        formRef.current.reset();
     };
 
-    render() {
-        console.log('AddForm');
-        return (
-            <form onSubmit={ this.onSubmit } ref={ this.formRef }>
-                <label htmlFor=""></label>
-                <input type="text" placeholder="습관 등록하기" ref={ this.inputRef }/>
-                <button type="submit">추가하기</button>
-            </form>
-        );
-    }
-}
+
+    return (
+        <form onSubmit={ onSubmit } ref={ formRef }>
+            <label htmlFor=""></label>
+            <input type="text" placeholder="습관 등록하기" ref={ inputRef }/>
+            <button type="submit">추가하기</button>
+        </form>
+    );
+});
 
 export default AddForm;
