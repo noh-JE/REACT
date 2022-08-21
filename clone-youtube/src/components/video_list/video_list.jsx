@@ -1,5 +1,6 @@
 import React from 'react';
 import VideoItem from '../video_item/video_item';
+import styles from './video_list.css';
 
 const videoList = (props) => {
     const videos = props.videos;
@@ -7,9 +8,9 @@ const videoList = (props) => {
     return (
         <div>
             <h2>목록</h2>
-            <ul>
+            <ul className={styles.videos}>
                 {
-                    videos.map((video) => (
+                    videos && videos.map((video) => (
                         <VideoItem key={video.id} video={video} />
                     ))
                 }
